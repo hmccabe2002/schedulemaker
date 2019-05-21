@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Schedule</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<style>
+table,tr,th,td{
+border:1px solid black;
+border-collapse: collapse;
+text-align:center;
+}
+#add {
+border: none;
+}
+</style>
+<script>
+var sch = "<tr><th>Period</th><th>Class</th><th>Teacher</th><th>Room</th></tr>";
+function addClass(){
+    var per = document.getElementById("per").value;
+    var cla = document.getElementById("cla").value;
+    var tea = document.getElementById("tea").value;
+    var roo = document.getElementById("roo").value;
+    
+    sch += "<tr><td>"+per+"</td><td>"+cla+"</td><td>"+tea+"</td><td>"+roo+"</td></tr>";
+    document.getElementById("tbl").innerHTML = sch;
+}
+function printElem(divId) {
+    var content = document.getElementById(divId).innerHTML;
+    var mywindow = window.open('', 'Print', 'height=600,width=800');
+
+    mywindow.document.write('<html><head><title>Print</title><style>table,td,tr,th{border:1px solid black; border-collapse:collapse;text-align:center;}</style>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(content);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close();
+    mywindow.focus()
+    mywindow.print();
+    mywindow.close();
+    return true;
+}
+</script>
+</head>
+<body>
+<div id="add">
+        <input id="per" placeholder="Period" type="number">
+        <input id="cla" placeholder="Class" type="text">
+        <input id="tea" placeholder="Teacher" type="text">
+        <input id="roo" placeholder="Room" type="text">
+        <button onClick="addClass();">Add</button>
+        <button id="print" onClick="printElem('schedule');">Print</button>
+</div>
+<hr />
+<div id="schedule">
+<table id='tbl'>
+
+</table>
+</div>
+</body>
+</html>
